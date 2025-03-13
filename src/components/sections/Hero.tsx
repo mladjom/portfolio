@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
         <div className="hero__content">
           <div className="hero__text">
             <h1 className="hero__title">
-              <span className="hero__subtitle">Hello, I'm</span>
+              <span className="hero__subtitle">Hello, I&apos;m</span>
               <span className="hero__name">{portfolioData.name}</span>
             </h1>
             <h2 className="hero__role">{portfolioData.title}</h2>

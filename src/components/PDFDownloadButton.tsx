@@ -1,13 +1,13 @@
 "use client";
 
-import React from 'react';
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import React, { useState } from 'react';
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, pdf } from '@react-pdf/renderer';
 import portfolioData from '../data/portfolio-data';
 
 // Define styles for PDF
 const styles = StyleSheet.create({
   page: {
-    padding: 20,
+    padding: 30,
     fontFamily: 'Helvetica',
   },
   section: {
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 // Create PDF Document component
 const ResumeDocument = () => (
   <Document title={`${portfolioData.name} - Resume`} author={portfolioData.name}>
@@ -122,7 +121,7 @@ const ResumeDocument = () => (
         ))}
       </View>
 
-      {/* Languages */}
+      {/* Languages - Updated to display horizontally */}
       <View style={styles.section}>
         <Text style={styles.subheader}>Languages</Text>
         <View style={styles.languagesContainer}>
@@ -139,17 +138,34 @@ const ResumeDocument = () => (
   </Document>
 );
 
-// PDF Download component 
-const PDFDownloadButton = () => (
-  <PDFDownloadLink
-    document={<ResumeDocument />}
-    fileName={`${portfolioData.name.replace(/\s/g, '_')}_CV.pdf`}
-    className="button button--primary"
-  >
-    {({ loading }) =>
-      loading ? 'Generating PDF...' : 'Download CV'
-    }
-  </PDFDownloadLink>
-);
+// Client-side PDF Button component
+const ClientPDFButton = () => {
+  const [isClient, setIsClient] = useState(false);
 
-export default PDFDownloadButton;
+  // Use effect to confirm we're on client side
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <button className="button button--primary">
+        Download CV
+      </button>
+    );
+  }
+
+  return (
+    <PDFDownloadLink 
+      document={<ResumeDocument />} 
+      fileName={`${portfolioData.name.replace(/\s/g, '_')}_CV.pdf`}
+      className="button button--primary"
+    >
+      {({ blob, url, loading, error }) => 
+        loading ? 'Generating PDF...' : 'Download CV'
+      }
+    </PDFDownloadLink>
+  );
+};
+
+export default ClientPDFButton;

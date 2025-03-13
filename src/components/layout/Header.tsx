@@ -2,13 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { useRouter } from 'next/navigation';
 import portfolioData from '../../data/portfolio-data';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
 
   // Handle scroll event to change header appearance
   useEffect(() => {

@@ -72,25 +72,25 @@ const About: React.FC = () => {
           </div>
 
           <div className="about__text">
-            <h3 className="about__greeting">Hello! I'm <span className="about__name">{portfolioData.name}</span></h3>
+            <h3 className="about__greeting">Hello! I&apos;m <span className="about__name">{portfolioData.name}</span></h3>
 
             <p className="about__description">
               I am a passionate and dedicated software developer with over a decade of experience in building
               websites, web applications, and digital solutions for clients across various industries.
-              Based in Malmö, Sweden, I specialize in full-stack development with a focus on PHP,
-              JavaScript, and modern web technologies.
+              Based in Malmö, Sweden, I specialize in full-stack development with a focus on Python,
+              TypeScript, and modern web technologies.
             </p>
 
             <p className="about__description">
-              Throughout my career, I've worked on projects ranging from small business websites to
-              large e-commerce platforms and complex web applications. I'm committed to writing clean,
+              Throughout my career, I&apos;ve worked on projects ranging from small business websites to
+              large e-commerce platforms and complex web applications. I&apos;m committed to writing clean,
               maintainable code and creating user-friendly, responsive designs that provide exceptional
               user experiences.
             </p>
 
             <p className="about__description">
-              When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects,
-              and sharing my knowledge with the developer community. I'm always eager to take on new
+              When I&apos;m not coding, I enjoy exploring new technologies, contributing to open-source projects,
+              and sharing my knowledge with the developer community. I&apos;m always eager to take on new
               challenges and continue expanding my skill set in this ever-evolving industry.
             </p>
 
