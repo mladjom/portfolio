@@ -19,9 +19,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Mladen Milentijevic - Software Developer | Web Engineer | Tech Enthusiast',
-  description: 'Personal portfolio website of Mladen Milentijevic, a software developer and web engineer with expertise in PHP, JavaScript, and modern web technologies.',
+  description: 'Personal portfolio website of Mladen Milentijevic, a software developer and web engineer with expertise in Python, TypeScript, and modern web technologies.',
   authors: [{ name: 'Mladen Milentijevic' }],
-  keywords: ['software developer', 'web engineer', 'PHP', 'JavaScript', 'React', 'Laravel'],
+  keywords: ['software developer', 'web engineer', 'Python', 'TypeScript', 'React', 'Django'],
 };
 
 export default function RootLayout({

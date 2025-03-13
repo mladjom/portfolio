@@ -9,6 +9,9 @@ const About: React.FC = () => {
   const aboutRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = aboutRef.current;
+    
     // Animation for the about section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -21,14 +24,15 @@ const About: React.FC = () => {
         rootMargin: '-100px',
       }
     );
-
-    if (aboutRef.current) {
-      observer.observe(aboutRef.current);
+    
+    if (currentRef) {
+      observer.observe(currentRef);
     }
-
+    
     return () => {
-      if (aboutRef.current) {
-        observer.unobserve(aboutRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

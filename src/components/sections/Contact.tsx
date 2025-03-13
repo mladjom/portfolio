@@ -20,6 +20,9 @@ const Contact: React.FC = () => {
   });
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = contactRef.current;
+    
     // Animation for the contact section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,13 +36,14 @@ const Contact: React.FC = () => {
       }
     );
     
-    if (contactRef.current) {
-      observer.observe(contactRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (contactRef.current) {
-        observer.unobserve(contactRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

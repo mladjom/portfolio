@@ -8,6 +8,9 @@ const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = heroRef.current;
+    
     // Animation for the hero section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -20,13 +23,14 @@ const Hero: React.FC = () => {
       }
     );
     
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

@@ -10,6 +10,9 @@ const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = projectsRef.current;
+    
     // Animation for the projects section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -23,13 +26,14 @@ const Projects: React.FC = () => {
       }
     );
     
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (projectsRef.current) {
-        observer.unobserve(projectsRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

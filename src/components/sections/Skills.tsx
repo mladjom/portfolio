@@ -18,6 +18,9 @@ const Skills: React.FC = () => {
   };
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = skillsRef.current;
+    
     // Animation for the skills section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -31,13 +34,14 @@ const Skills: React.FC = () => {
       }
     );
     
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (skillsRef.current) {
-        observer.unobserve(skillsRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

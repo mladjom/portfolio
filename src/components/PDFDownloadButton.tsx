@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, pdf } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 import portfolioData from '../data/portfolio-data';
 
 // Define styles for PDF
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    padding: 20,
     fontFamily: 'Helvetica',
   },
   section: {
@@ -161,7 +161,7 @@ const ClientPDFButton = () => {
       fileName={`${portfolioData.name.replace(/\s/g, '_')}_CV.pdf`}
       className="button button--primary"
     >
-      {({ blob, url, loading, error }) => 
+      {({ loading }) => 
         loading ? 'Generating PDF...' : 'Download CV'
       }
     </PDFDownloadLink>

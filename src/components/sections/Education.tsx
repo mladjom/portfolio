@@ -7,6 +7,9 @@ const Education: React.FC = () => {
   const educationRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = educationRef.current;
+    
     // Animation for the education section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -20,13 +23,14 @@ const Education: React.FC = () => {
       }
     );
     
-    if (educationRef.current) {
-      observer.observe(educationRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (educationRef.current) {
-        observer.unobserve(educationRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

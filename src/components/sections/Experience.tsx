@@ -8,6 +8,9 @@ const Experience: React.FC = () => {
   const experienceRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
+    // Store a reference to the current DOM node
+    const currentRef = experienceRef.current;
+    
     // Animation for the experience section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -21,13 +24,14 @@ const Experience: React.FC = () => {
       }
     );
     
-    if (experienceRef.current) {
-      observer.observe(experienceRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (experienceRef.current) {
-        observer.unobserve(experienceRef.current);
+      // Use the stored reference in the cleanup function
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
