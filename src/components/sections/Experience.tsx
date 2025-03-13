@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import portfolioData from '../../data/portfolio-data';
+import PDFDownloadButton from '../PDFDownloadButton';
 
 const Experience: React.FC = () => {
   const experienceRef = useRef<HTMLElement>(null);
@@ -67,13 +68,8 @@ const Experience: React.FC = () => {
           
           <div className="experience__download">
             <p>Want to know more about my work experience?</p>
-            <a 
-              href="/cv.pdf" 
-              download="Mladen_Milentijevic_CV.pdf" 
-              className="button button--primary"
-            >
-              Download Full Resume
-            </a>
+            <PDFDownloadButton />
+
           </div>
         </div>
       </div>

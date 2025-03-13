@@ -15,7 +15,6 @@ const Skills: React.FC = () => {
     backend: portfolioData.skills.filter(skill => skill.category === 'backend'),
     database: portfolioData.skills.filter(skill => skill.category === 'database'),
     devops: portfolioData.skills.filter(skill => skill.category === 'devops'),
-    other: portfolioData.skills.filter(skill => skill.category === 'other'),
   };
   
   useEffect(() => {
@@ -105,12 +104,6 @@ const Skills: React.FC = () => {
                 value="devops"
               >
                 DevOps
-              </Tabs.Trigger>
-              <Tabs.Trigger 
-                className={`skills__tab-trigger ${activeTab === 'other' ? 'skills__tab-trigger--active' : ''}`} 
-                value="other"
-              >
-                Other
               </Tabs.Trigger>
             </Tabs.List>
             

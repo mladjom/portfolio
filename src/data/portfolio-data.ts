@@ -1,7 +1,7 @@
 // Define types for our portfolio data
 export interface Skill {
     name: string;
-    category: 'frontend' | 'backend' | 'database' | 'devops' | 'other';
+    category: 'frontend' | 'backend' | 'database' | 'devops';
     level: number; // 1-5
     icon?: string;
   }
@@ -49,7 +49,7 @@ export interface Skill {
   const portfolioData: PortfolioData = {
     name: "Mladen Milentijevic",
     title: "Software Developer | Web Engineer | Tech Enthusiast",
-    summary: "Experienced software developer with a strong background in full-stack development, web-based applications, and UI/UX. Skilled in React, Laravel, PHP, and modern web technologies, with a passion for performance optimization and scalable architectures.",
+    summary: "Experienced software developer with a strong background in full-stack development, web-based applications, and UI/UX. Skilled in React, Django, GraphQL, and modern web technologies, with a passion for performance optimization and scalable architectures.",
     location: "Malmö, Sweden",
     phone: "+46(0)762340545",
     email: "mladenmilentijevic@gmail.com",
@@ -57,48 +57,46 @@ export interface Skill {
     github: "github.com/mladjom",
     
     skills: [
-      { name: "PHP OOP", category: "backend", level: 5 },
+      { name: "Python", category: "backend", level: 5 },
+      { name: "Django", category: "backend", level: 5 },
+      { name: "FastAPI", category: "backend", level: 5 },
+      { name: "PHP", category: "backend", level: 5 },
       { name: "Symfony", category: "backend", level: 4 },
       { name: "Laravel", category: "backend", level: 5 },
-      { name: "WordPress", category: "backend", level: 5 },
-      { name: "WooCommerce", category: "backend", level: 4 },
       { name: "REST APIs", category: "backend", level: 5 },
-      { name: "SOAP", category: "backend", level: 4 },
-      { name: "OAuth", category: "backend", level: 4 },
+      { name: "GraphQL", category: "backend", level: 4 },
       { name: "Linux", category: "devops", level: 4 },
       { name: "Ubuntu", category: "devops", level: 4 },
       { name: "CentOS", category: "devops", level: 3 },
-      { name: "Vagrant", category: "devops", level: 3 },
+      { name: "Docker", category: "devops", level: 3 },
       { name: "MySQL", category: "database", level: 5 },
       { name: "PostgreSQL", category: "database", level: 4 },
       { name: "MongoDB", category: "database", level: 3 },
-      { name: "Database Design", category: "database", level: 4 },
+      { name: "SQLite", category: "database", level: 3 },
       { name: "CSS", category: "frontend", level: 5 },
       { name: "SCSS", category: "frontend", level: 4 },
-      { name: "SASS", category: "frontend", level: 4 },
-      { name: "LESS", category: "frontend", level: 4 },
       { name: "JavaScript", category: "frontend", level: 5 },
       { name: "jQuery", category: "frontend", level: 5 },
-      { name: "JSON", category: "frontend", level: 5 },
-      { name: "AJAX", category: "frontend", level: 5 },
-      { name: "Angular", category: "frontend", level: 3 },
+      { name: "TypeScript", category: "frontend", level: 5 },
       { name: "React", category: "frontend", level: 4 },
       { name: "Next.js", category: "frontend", level: 3 },
       { name: "Git", category: "devops", level: 4 },
-      { name: "Subversion", category: "devops", level: 3 },
       { name: "HTML", category: "frontend", level: 5 },
       { name: "Bootstrap", category: "frontend", level: 4 },
-      { name: "Ionic Framework", category: "frontend", level: 3 },
       { name: "C#", category: "backend", level: 3 },
-      { name: "ASP.NET", category: "backend", level: 3 },
-      { name: "MVC", category: "backend", level: 3 },
-      { name: "Azure", category: "devops", level: 2 },
-      { name: "SQL Server", category: "database", level: 3 },
+      { name: ".NET", category: "backend", level: 3 },
       { name: "Tailwind CSS", category: "frontend", level: 4 },
       { name: "UI/UX Design", category: "frontend", level: 4 },
     ],
     
     experiences: [
+      {
+        company: "Freelancer & Independent Projects",
+        position: "Web Developer",
+        period: "2017-Present",
+        description: "Developed custom software solutions, built web applications, and contributed to open-source projects.",
+        skills: ["Full-stack Development", "Web Applications", "Open-source Contributions"]
+      },
       {
         company: "Tiles R Us AB",
         position: "Senior Web Developer",
@@ -114,32 +112,11 @@ export interface Skill {
         skills: ["PHP", "MongoDB", "Facebook API", "REST", "AJAX"]
       },
       {
-        company: "Stratega Group AB",
-        position: "Frontend Developer",
-        period: "2013",
-        description: "Developed frontend interfaces using HTML, CSS, JavaScript, and SASS. Worked on responsive designs and cross-browser compatibility.",
-        skills: ["HTML", "CSS", "JS", "SASS"]
-      },
-      {
         company: "Computer Sciences Corporation (CSC)",
         position: "GUI Designer",
         period: "2011-2012",
         description: "Designed user interfaces and improved user experience for web applications. Created wireframes and prototypes.",
         skills: ["UI", "UX"]
-      },
-      {
-        company: "Visual Hosting LTD",
-        position: "Software Developer",
-        period: "2005-2017",
-        description: "Worked on web hosting solutions, server management, and software development, ensuring high availability and performance.",
-        skills: ["Linux", "Server Management", "Web Hosting", "Performance Optimization"]
-      },
-      {
-        company: "Freelancer & Independent Projects",
-        position: "Web Developer",
-        period: "2017-Present",
-        description: "Developed custom software solutions, built web applications, and contributed to open-source projects.",
-        skills: ["Full-stack Development", "Web Applications", "Open-source Contributions"]
       }
     ],
     
