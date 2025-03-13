@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio Website
+
+A modern, responsive personal portfolio website built with Next.js, TypeScript, Radix UI, and SCSS.
+
+## Features
+
+- 📱 Fully responsive design
+- 🎨 Custom SCSS with BEM methodology
+- 🧩 Modular component structure
+- 🔍 SEO optimized
+- 🔄 Smooth animations and transitions
+- 🎛️ Accessible UI components with Radix UI
+- 🌐 Next.js for optimized performance
+
+## Technologies Used
+
+- **Next.js** - React framework for server-side rendering and static site generation
+- **TypeScript** - Typed JavaScript for better developer experience
+- **SCSS** - CSS preprocessor for more maintainable styles
+- **BEM** - CSS naming convention for more organized styles
+- **Radix UI** - Unstyled, accessible UI components
+- **Intersection Observer API** - For scroll-based animations
+
+## Project Structure
+
+```
+portfolio-site/
+├── public/
+│   ├── images/
+│   │   ├── profile.jpg
+│   │   ├── projects/
+│   │   └── skills/
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   ├── sections/
+│   │   └── ui/
+│   ├── styles/
+│   │   ├── variables.scss
+│   │   ├── mixins.scss
+│   │   ├── global.scss
+│   │   └── components/
+│   ├── types/
+│   ├── data/
+│   │   └── portfolio-data.ts
+│   └── pages/
+│       ├── _app.tsx
+│       ├── _document.tsx
+│       └── index.tsx
+├── tsconfig.json
+└── package.json
+```
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/portfolio-site.git
+cd portfolio-site
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## Customization
 
-To learn more about Next.js, take a look at the following resources:
+### Personal Information
+Update your personal information in the `src/data/portfolio-data.ts` file:
+- Name, title, and contact information
+- Skills and experience
+- Education and certifications
+- Projects and work samples
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Styling
+Customize the look and feel by modifying:
+- `src/styles/variables.scss` - Colors, typography, spacing
+- `src/styles/components/` - Component-specific styles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Images
+Replace the placeholder images in the `public/images/` directory with your own:
+- `profile.jpg` - Your profile picture
+- `projects/` - Images of your projects
+- `about.jpg` - Image for the About section
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site can be easily deployed to Vercel, Netlify, or other platforms that support Next.js:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+This will create an optimized production build in the `.next` folder.
+
+## License
+
+This project is available as open-source under the terms of the MIT License.

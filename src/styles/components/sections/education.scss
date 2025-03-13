@@ -1,0 +1,294 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.education {
+  background-color: $color-background-alt;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.05);
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.05);
+    z-index: 0;
+  }
+  
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-12;
+    position: relative;
+    z-index: 1;
+    
+    @include md {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  &__col {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    
+    &:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+    
+    .education--animated & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  &__heading {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin-bottom: $spacing-6;
+    position: relative;
+    padding-bottom: $spacing-2;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: $color-primary;
+    }
+  }
+  
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-6;
+  }
+  
+  &__item {
+    opacity: 0;
+    
+    .education--animated & {
+      animation-name: fadeInUp;
+      animation-duration: 0.6s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  &__card {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-6;
+    box-shadow: $shadow-md;
+    transition: $transition-base;
+    border-left: 4px solid $color-primary;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__period {
+    display: inline-block;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    padding: $spacing-1 $spacing-3;
+    border-radius: $border-radius-full;
+    margin-bottom: $spacing-3;
+  }
+  
+  &__degree {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__institution {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+    margin-bottom: $spacing-3;
+  }
+  
+  &__description {
+    @include body-text-sm;
+    color: $color-text-light;
+  }
+  
+  // Languages styles
+  &__languages {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-bottom: $spacing-8;
+  }
+  
+  &__language-item {
+    opacity: 0;
+    
+    .education--animated & {
+      animation-name: fadeInRight;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+  
+  &__language-card {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-4 $spacing-6;
+    box-shadow: $shadow-md;
+    transition: $transition-base;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__language-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__language-level {
+    @include flex-column;
+    gap: $spacing-2;
+  }
+  
+  &__language-proficiency {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+  
+  &__language-bar {
+    width: 100%;
+    height: 6px;
+    background-color: $color-background-alt;
+    border-radius: $border-radius-full;
+    overflow: hidden;
+  }
+  
+  &__language-progress {
+    height: 100%;
+    background-color: $color-primary;
+    border-radius: $border-radius-full;
+    width: 0;
+    
+    .education--animated & {
+      animation: progressAnimation 1.5s ease-in-out forwards;
+    }
+    
+    @keyframes progressAnimation {
+      from {
+        width: 0;
+      }
+      to {
+        width: var(--width, 100%);
+      }
+    }
+  }
+  
+  // Certifications styles
+  &__additional {
+    margin-top: $spacing-8;
+  }
+  
+  &__certifications {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+  
+  &__cert-item {
+    opacity: 0;
+    
+    .education--animated & {
+      animation-name: fadeInUp;
+      animation-duration: 0.6s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+  }
+  
+  &__cert-card {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-4 $spacing-6;
+    box-shadow: $shadow-md;
+    transition: $transition-base;
+    border-left: 4px solid $color-primary;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__cert-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin-bottom: $spacing-1;
+  }
+  
+  &__cert-issuer {
+    font-size: $font-size-sm;
+    color: $color-primary;
+    margin-bottom: $spacing-1;
+  }
+  
+  &__cert-date {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+}

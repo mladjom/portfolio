@@ -1,0 +1,219 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.contact {
+  background-color: $color-background;
+  position: relative;
+  
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-12;
+    
+    @include md {
+      grid-template-columns: 1fr 1.5fr;
+    }
+  }
+  
+  &__info {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    
+    .contact--animated & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  &__info-heading {
+    margin-bottom: $spacing-6;
+    
+    h3 {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+      color: $color-text;
+      margin-bottom: $spacing-2;
+    }
+    
+    p {
+      @include body-text;
+      color: $color-text-light;
+    }
+  }
+  
+  &__info-items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-6;
+    margin-bottom: $spacing-8;
+  }
+  
+  &__info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-4;
+  }
+  
+  &__info-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    @include flex-center;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+  }
+  
+  &__info-content {
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-text;
+      margin-bottom: $spacing-1;
+    }
+    
+    p {
+      @include body-text;
+      color: $color-text-light;
+    }
+  }
+  
+  &__info-link {
+    color: $color-text-light;
+    text-decoration: none;
+    transition: $transition-base;
+    
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  
+  &__social {
+    margin-top: $spacing-8;
+    
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-text;
+      margin-bottom: $spacing-4;
+    }
+  }
+  
+  &__social-links {
+    display: flex;
+    gap: $spacing-4;
+  }
+  
+  &__social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    @include flex-center;
+    transition: $transition-base;
+    
+    &:hover {
+      background-color: $color-primary;
+      color: $color-background;
+      transform: translateY(-3px);
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+  }
+  
+  &__form-container {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s ease-out 0.2s;
+    
+    .contact--animated & {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  &__form {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-8;
+    box-shadow: $shadow-lg;
+  }
+  
+  &__alert {
+    padding: $spacing-4;
+    border-radius: $border-radius;
+    margin-bottom: $spacing-6;
+    
+    &--success {
+      background-color: rgba($color-success, 0.1);
+      color: $color-success;
+      border: 1px solid rgba($color-success, 0.2);
+    }
+    
+    &--error {
+      background-color: rgba($color-error, 0.1);
+      color: $color-error;
+      border: 1px solid rgba($color-error, 0.2);
+    }
+  }
+  
+  &__form-group {
+    margin-bottom: $spacing-6;
+  }
+  
+  &__form-label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__form-input,
+  &__form-textarea {
+    width: 100%;
+    padding: $spacing-3 $spacing-4;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    background-color: $color-background;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    color: $color-text;
+    transition: $transition-base;
+    
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 2px rgba($color-primary, 0.1);
+    }
+    
+    &::placeholder {
+      color: rgba($color-text-light, 0.5);
+    }
+  }
+  
+  &__form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  &__form-submit {
+    margin-top: $spacing-8;
+    
+    button {
+      min-width: 150px;
+    }
+  }
+}

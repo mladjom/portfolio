@@ -1,0 +1,246 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+// Section Common Styles
+.section {
+  @include section-spacing;
+  
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-16;
+  }
+  
+  &__title {
+    @include heading-2;
+    position: relative;
+    padding-bottom: $spacing-4;
+    margin-bottom: $spacing-2;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: $color-primary;
+      border-radius: $border-radius-full;
+    }
+  }
+  
+  &__subtitle {
+    @include body-text-lg;
+    color: $color-text-light;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.about {
+  background-color: $color-background-alt;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.05);
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: rgba($color-primary, 0.05);
+    z-index: 0;
+  }
+  
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-12;
+    position: relative;
+    z-index: 1;
+    
+    @include md {
+      grid-template-columns: 2fr 3fr;
+      gap: $spacing-16;
+    }
+  }
+  
+  &__image {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    
+    .about--animated & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  &__image-container {
+    border-radius: $border-radius-2xl;
+    overflow: hidden;
+    box-shadow: $shadow-lg;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: rgba($color-primary, 0.2);
+      z-index: -1;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: -30px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: rgba($color-primary, 0.1);
+      z-index: -1;
+    }
+  }
+  
+  &__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+    
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+  
+  &__experience {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-4;
+    margin-top: $spacing-6;
+  }
+  
+  &__experience-item {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-4;
+    text-align: center;
+    box-shadow: $shadow-md;
+    transition: $transition-base;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__experience-number {
+    display: block;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: $spacing-1;
+  }
+  
+  &__experience-text {
+    @include body-text-sm;
+    color: $color-text-light;
+  }
+  
+  &__text {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s ease-out 0.2s;
+    
+    .about--animated & {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  &__greeting {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-4;
+    color: $color-text;
+  }
+  
+  &__name {
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+  
+  &__description {
+    @include body-text;
+    color: $color-text-light;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-4;
+    margin-top: $spacing-6;
+    margin-bottom: $spacing-8;
+    
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  &__info-item {
+    @include flex-column;
+    gap: $spacing-1;
+    
+    @include sm {
+      flex-direction: row;
+      gap: $spacing-3;
+    }
+  }
+  
+  &__info-label {
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    min-width: 80px;
+  }
+  
+  &__info-value {
+    color: $color-text-light;
+  }
+  
+  &__info-link {
+    color: $color-primary;
+    text-decoration: none;
+    transition: $transition-base;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  &__cta {
+    margin-top: $spacing-6;
+  }
+}

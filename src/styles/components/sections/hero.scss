@@ -1,0 +1,252 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: $spacing-16;
+  position: relative;
+  background: linear-gradient(135deg, rgba($color-background, 0.95), rgba($color-background-alt, 0.95));
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/hero-pattern.svg');
+    background-size: cover;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-12;
+    
+    @include md {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  
+  &__text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-in-out;
+    
+    .hero--animated & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @include md {
+      flex-basis: 50%;
+    }
+  }
+  
+  &__title {
+    @include flex-column;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__subtitle {
+    color: $color-primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__name {
+    @include heading-1;
+    color: $color-text;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__role {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-light;
+    margin-bottom: $spacing-6;
+  }
+  
+  &__description {
+    @include body-text-lg;
+    color: $color-text-light;
+    margin-bottom: $spacing-8;
+    max-width: 90%;
+    
+    @include md {
+      max-width: 80%;
+    }
+  }
+  
+  &__cta {
+    display: flex;
+    gap: $spacing-4;
+    flex-wrap: wrap;
+  }
+  
+  &__image {
+    position: relative;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s ease-in-out 0.2s;
+    
+    .hero--animated & {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    @include md {
+      flex-basis: 40%;
+    }
+  }
+  
+  &__image-container {
+    position: relative;
+    border-radius: $border-radius-2xl;
+    overflow: hidden;
+    box-shadow: $shadow-xl;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: rgba($color-primary, 0.1);
+      z-index: -1;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: rgba($color-primary, 0.15);
+      z-index: -1;
+    }
+  }
+  
+  &__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+    
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+  
+  &__experience-badge {
+    position: absolute;
+    bottom: 30px;
+    left: -20px;
+    background-color: $color-primary;
+    color: $color-background;
+    border-radius: $border-radius-full;
+    padding: $spacing-4;
+    min-width: 120px;
+    box-shadow: $shadow-lg;
+    animation: pulse 2s infinite;
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba($color-primary, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba($color-primary, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba($color-primary, 0);
+      }
+    }
+  }
+  
+  &__badge-content {
+    @include flex-column;
+    text-align: center;
+  }
+  
+  &__badge-number {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+  }
+  
+  &__badge-text {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-top: $spacing-1;
+  }
+  
+  &__scroll-down {
+    position: absolute;
+    bottom: $spacing-8;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out 1.5s forwards;
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+  
+  &__scroll-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  &__scroll-icon {
+    width: 30px;
+    height: 50px;
+    border: 2px solid $color-text-light;
+    border-radius: 15px;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background-color: $color-text-light;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: scrollDown 2s infinite;
+      
+      @keyframes scrollDown {
+        0% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,158 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.skills {
+  background-color: $color-background;
+  position: relative;
+  
+  &__content {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    
+    .skills--animated & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  &__tabs {
+    width: 100%;
+  }
+  
+  &__tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-2;
+    margin-bottom: $spacing-8;
+    
+    @include md {
+      gap: $spacing-4;
+    }
+  }
+  
+  &__tab-trigger {
+    @include button-base;
+    background-color: transparent;
+    border: 1px solid $color-border;
+    color: $color-text;
+    font-size: $font-size-sm;
+    padding: $spacing-2 $spacing-4;
+    
+    @include md {
+      font-size: $font-size-base;
+      padding: $spacing-3 $spacing-6;
+    }
+    
+    &:hover {
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+    
+    &--active {
+      background-color: $color-primary;
+      color: $color-background;
+      border-color: $color-primary;
+      
+      &:hover {
+        color: $color-background;
+      }
+    }
+  }
+  
+  &__tab-content {
+    width: 100%;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+    
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  &__item {
+    background-color: $color-background;
+    border-radius: $border-radius-lg;
+    padding: $spacing-6;
+    box-shadow: $shadow-md;
+    transition: $transition-base;
+    opacity: 0;
+    transform: translateY(20px);
+    animation-name: fadeInUp;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__item-header {
+    @include flex-between;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__item-name {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+  }
+  
+  &__item-level {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-primary;
+  }
+  
+  &__progress {
+    width: 100%;
+    height: 8px;
+    background-color: $color-background-alt;
+    border-radius: $border-radius-full;
+    overflow: hidden;
+  }
+  
+  &__progress-bar {
+    height: 100%;
+    background-color: $color-primary;
+    border-radius: $border-radius-full;
+    transition: width 1.5s ease-in-out;
+    width: 0;
+    
+    .skills--animated & {
+      animation: progressAnimation 1.5s ease-in-out forwards;
+    }
+    
+    @keyframes progressAnimation {
+      from {
+        width: 0;
+      }
+      to {
+        width: var(--width, 100%);
+      }
+    }
+  }
+}
