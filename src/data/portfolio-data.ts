@@ -139,13 +139,13 @@ export interface Skill {
         title: "E-commerce Platform",
         description: "Custom WooCommerce implementation with multiple payment gateways and shipping integrations.",
         technologies: ["WordPress", "WooCommerce", "PHP", "MySQL", "Swish API", "DHL API"],
-        image: "ecommerce.jpg"
+        image: "ecommerce_1280x720.webp"
       },
       {
         title: "Content Management System",
         description: "Tailor-made CMS for a media company with social media integration and analytics.",
         technologies: ["PHP", "Laravel", "MySQL", "REST API", "React"],
-        image: "cms.jpg"
+        image: "cms_1280x720.webp"
       },
       {
         title: "Portfolio Website",
@@ -159,7 +159,7 @@ export interface Skill {
         title: "Typography Tool",
         description: "Web-based typography tool for designers and developers.",
         technologies: ["React", "CSS", "JavaScript"],
-        image: "typography.jpg"
+        image: "webtools_1280x720.webp"
       }
     ],
     

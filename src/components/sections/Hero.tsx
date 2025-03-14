@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
           <div className="hero__image">
             <div className="hero__image-container">
               <Image 
-                src="/images/profile.jpg"
+                src="/images/avatar.svg"
                 alt={portfolioData.name}
                 width={400}
                 height={450}

@@ -189,7 +189,7 @@ const Contact: React.FC = () => {
       <div className="container">
         <div className="section__header">
           <h2 className="section__title">Get In Touch</h2>
-          <p className="section__subtitle">Let's discuss your project or just say hello</p>
+          <p className="section__subtitle">Let&apos;s discuss your project or just say hello</p>
         </div>
         
         <div className="contact__content">
