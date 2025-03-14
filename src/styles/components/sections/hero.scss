@@ -1,14 +1,14 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
+@use '../../variables.scss';
+@use '../../mixins.scss';
 
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   padding-top: 100px;
-  padding-bottom: $spacing-16;
+  padding-bottom: variables.$spacing-16;
   position: relative;
-  background: linear-gradient(135deg, rgba($color-background, 0.95), rgba($color-background-alt, 0.95));
+  background: linear-gradient(135deg, rgba(variables.$color-background, 0.95), rgba(variables.$color-background-alt, 0.95));
   overflow: hidden;
   
   &::before {
@@ -27,9 +27,9 @@
   &__content {
     display: flex;
     flex-direction: column;
-    gap: $spacing-12;
+    gap: variables.$spacing-12;
     
-    @include md {
+    @include mixins.md {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
@@ -46,50 +46,50 @@
       transform: translateY(0);
     }
     
-    @include md {
+    @include mixins.md {
       flex-basis: 50%;
     }
   }
   
   &__title {
-    @include flex-column;
-    margin-bottom: $spacing-4;
+    @include mixins.flex-column;
+    margin-bottom: variables.$spacing-4;
   }
   
   &__subtitle {
-    color: $color-primary;
-    font-size: $font-size-lg;
-    font-weight: $font-weight-medium;
-    margin-bottom: $spacing-2;
+    color: variables.$color-primary;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-medium;
+    margin-bottom: variables.$spacing-2;
   }
   
   &__name {
-    @include heading-1;
-    color: $color-text;
-    margin-bottom: $spacing-2;
+    @include mixins.heading-1;
+    color: variables.$color-text;
+    margin-bottom: variables.$spacing-2;
   }
   
   &__role {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
-    color: $color-text-light;
-    margin-bottom: $spacing-6;
+    font-size: variables.$font-size-xl;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text-light;
+    margin-bottom: variables.$spacing-6;
   }
   
   &__description {
-    @include body-text-lg;
-    color: $color-text-light;
-    margin-bottom: $spacing-8;
+    @include mixins.body-text-lg;
+    color: variables.$color-text-light;
+    margin-bottom: variables.$spacing-8;
     max-width: 90%;
     
-    @include md {
+    @include mixins.md {
       max-width: 80%;
     }
   }
   
   &__cta {
     display: flex;
-    gap: $spacing-4;
+    gap: variables.$spacing-4;
     flex-wrap: wrap;
   }
   
@@ -104,16 +104,16 @@
       transform: translateX(0);
     }
     
-    @include md {
+    @include mixins.md {
       flex-basis: 40%;
     }
   }
   
   &__image-container {
     position: relative;
-    border-radius: $border-radius-2xl;
+    border-radius: variables.$border-radius-2xl;
     overflow: hidden;
-    box-shadow: $shadow-xl;
+    box-shadow: variables.$shadow-xl;
     
     &::before {
       content: '';
@@ -123,7 +123,7 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      background-color: rgba($color-primary, 0.1);
+      background-color: rgba(variables.$color-primary, 0.1);
       z-index: -1;
     }
     
@@ -135,7 +135,7 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background-color: rgba($color-primary, 0.15);
+      background-color: rgba(variables.$color-primary, 0.15);
       z-index: -1;
     }
   }
@@ -155,47 +155,47 @@
     position: absolute;
     bottom: 30px;
     left: -20px;
-    background-color: $color-primary;
-    color: $color-background;
-    border-radius: $border-radius-full;
-    padding: $spacing-4;
+    background-color: variables.$color-primary;
+    color: variables.$color-background;
+    border-radius: variables.$border-radius-full;
+    padding: variables.$spacing-4;
     min-width: 120px;
-    box-shadow: $shadow-lg;
+    box-shadow: variables.$shadow-lg;
     animation: pulse 2s infinite;
     
     @keyframes pulse {
       0% {
-        box-shadow: 0 0 0 0 rgba($color-primary, 0.7);
+        box-shadow: 0 0 0 0 rgba(variables.$color-primary, 0.7);
       }
       70% {
-        box-shadow: 0 0 0 10px rgba($color-primary, 0);
+        box-shadow: 0 0 0 10px rgba(variables.$color-primary, 0);
       }
       100% {
-        box-shadow: 0 0 0 0 rgba($color-primary, 0);
+        box-shadow: 0 0 0 0 rgba(variables.$color-primary, 0);
       }
     }
   }
   
   &__badge-content {
-    @include flex-column;
+    @include mixins.flex-column;
     text-align: center;
   }
   
   &__badge-number {
-    font-size: $font-size-2xl;
-    font-weight: $font-weight-bold;
+    font-size: variables.$font-size-2xl;
+    font-weight: variables.$font-weight-bold;
     line-height: 1;
   }
   
   &__badge-text {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
-    margin-top: $spacing-1;
+    font-size: variables.$font-size-xs;
+    font-weight: variables.$font-weight-medium;
+    margin-top: variables.$spacing-1;
   }
   
   &__scroll-down {
     position: absolute;
-    bottom: $spacing-8;
+    bottom: variables.$spacing-8;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -221,7 +221,7 @@
   &__scroll-icon {
     width: 30px;
     height: 50px;
-    border: 2px solid $color-text-light;
+    border: 2px solid variables.$color-text-light;
     border-radius: 15px;
     position: relative;
     
@@ -232,7 +232,7 @@
       left: 50%;
       width: 6px;
       height: 6px;
-      background-color: $color-text-light;
+      background-color: variables.$color-text-light;
       border-radius: 50%;
       transform: translateX(-50%);
       animation: scrollDown 2s infinite;

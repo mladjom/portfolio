@@ -1,5 +1,5 @@
-@import './variables.scss';
-@import './mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 /* Box sizing rules */
 *,
@@ -27,9 +27,9 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-family: $font-family-base;
-  color: $color-text;
-  background-color: $color-background;
+  font-family: variables.$font-family-base;
+  color: variables.$color-text;
+  background-color: variables.$color-background;
 }
 
 /* Remove list styles on ul, ol elements with a class */
@@ -74,82 +74,82 @@ select {
 
 /* Global container */
 .container {
-  @include container;
+  @include mixins.container;
 }
 
 /* Section classes */
 .section {
-  @include section-spacing;
+  @include mixins.section-spacing;
   
   &--dark {
-    background-color: $color-secondary;
-    color: $color-background;
+    background-color: variables.$color-secondary;
+    color: variables.$color-background;
   }
   
   &--light {
-    background-color: $color-background-alt;
+    background-color: variables.$color-background-alt;
   }
 }
 
 /* Typography classes */
 .heading-1 {
-  @include heading-1;
+  @include mixins.heading-1;
 }
 
 .heading-2 {
-  @include heading-2;
+  @include mixins.heading-2;
 }
 
 .heading-3 {
-  @include heading-3;
+  @include mixins.heading-3;
 }
 
 .text-body {
-  @include body-text;
+  @include mixins.body-text;
 }
 
 .text-body-lg {
-  @include body-text-lg;
+  @include mixins.body-text-lg;
 }
 
 .text-body-sm {
-  @include body-text-sm;
+  @include mixins.body-text-sm;
 }
 
 /* Button classes */
 .button {
-  @include button-base;
+  @include mixins.button-base;
   
   &--primary {
-    @include button-primary;
+    @include mixins.button-primary;
   }
   
   &--secondary {
-    @include button-secondary;
+    @include mixins.button-secondary;
   }
   
   &--outline {
-    @include button-outline;
+    @include mixins.button-outline;
   }
 }
 
 /* Card class */
 .card {
-  @include card;
+  @include mixins.card;
 }
 
 /* Utility classes */
-.mt-1 { margin-top: $spacing-1; }
-.mt-2 { margin-top: $spacing-2; }
-.mt-4 { margin-top: $spacing-4; }
-.mt-8 { margin-top: $spacing-8; }
-.mt-16 { margin-top: $spacing-16; }
+.mt-1 { margin-top: variables.$spacing-1; }
+.mt-2 { margin-top: variables.$spacing-2; }
+.mt-4 { margin-top: variables.$spacing-4; }
+.mt-8 { margin-top: variables.$spacing-8; }
+.mt-16 { margin-top: variables.$spacing-16; }
 
-.mb-1 { margin-bottom: $spacing-1; }
-.mb-2 { margin-bottom: $spacing-2; }
-.mb-4 { margin-bottom: $spacing-4; }
-.mb-8 { margin-bottom: $spacing-8; }
-.mb-16 { margin-bottom: $spacing-16; }
+.mb-1 { margin-bottom: variables.$spacing-1; }
+.mb-2 { margin-bottom: variables.$spacing-2; }
+.mb-4 { margin-bottom: variables.$spacing-4; }
+.mb-8 { margin-bottom: variables.$spacing-8; }
+.mb-16 { margin-bottom: variables.$spacing-16; }
 
 .text-center { text-align: center; }
 .text-right { text-align: right; }
@@ -160,6 +160,6 @@ select {
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
 .flex-wrap { flex-wrap: wrap; }
-.gap-2 { gap: $spacing-2; }
-.gap-4 { gap: $spacing-4; }
-.gap-8 { gap: $spacing-8; }
+.gap-2 { gap: variables.$spacing-2; }
+.gap-4 { gap: variables.$spacing-4; }
+.gap-8 { gap: variables.$spacing-8; }

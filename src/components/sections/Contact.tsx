@@ -18,11 +18,13 @@ const Contact: React.FC = () => {
     type: null,
     message: ''
   });
-  
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     // Store a reference to the current DOM node
     const currentRef = contactRef.current;
-    
+
     // Animation for the contact section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,11 +37,11 @@ const Contact: React.FC = () => {
         rootMargin: '-100px',
       }
     );
-    
+
     if (currentRef) {
       observer.observe(currentRef);
     }
-    
+
     return () => {
       // Use the stored reference in the cleanup function
       if (currentRef) {
@@ -47,7 +49,7 @@ const Contact: React.FC = () => {
       }
     };
   }, []);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -55,10 +57,10 @@ const Contact: React.FC = () => {
       [name]: value
     }));
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       setFormStatus({
@@ -67,7 +69,7 @@ const Contact: React.FC = () => {
       });
       return;
     }
-    
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
@@ -77,14 +79,32 @@ const Contact: React.FC = () => {
       });
       return;
     }
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    setIsSubmitting(true);
+    setFormStatus({ type: null, message: '' });
+
+    try {
+      // Send the form data to the API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      // Success
       setFormStatus({
         type: 'success',
         message: 'Your message has been sent successfully! I will get back to you soon.'
       });
-      
+
       // Reset form after successful submission
       setFormData({
         name: '',
@@ -92,7 +112,7 @@ const Contact: React.FC = () => {
         subject: '',
         message: ''
       });
-      
+
       // Clear success message after 5 seconds
       setTimeout(() => {
         setFormStatus({
@@ -100,9 +120,18 @@ const Contact: React.FC = () => {
           message: ''
         });
       }, 5000);
-    }, 1000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send your message. Please try again later.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-  
+
   return (
     <section id="contact" className="contact section" ref={contactRef}>
       <div className="container">
@@ -110,14 +139,14 @@ const Contact: React.FC = () => {
           <h2 className="section__title">Get In Touch</h2>
           <p className="section__subtitle">Let&apos;s discuss your project or just say hello</p>
         </div>
-        
+
         <div className="contact__content">
           <div className="contact__info">
             <div className="contact__info-heading">
               <h3>Contact Information</h3>
               <p>Feel free to reach out through any of the following methods:</p>
             </div>
-            
+
             <div className="contact__info-items">
               <div className="contact__info-item">
                 <div className="contact__info-icon">
@@ -132,7 +161,7 @@ const Contact: React.FC = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -147,7 +176,7 @@ const Contact: React.FC = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -160,7 +189,7 @@ const Contact: React.FC = () => {
                   <p>{portfolioData.location}</p>
                 </div>
               </div>
-              
+
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -177,7 +206,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="contact__social">
               <h4>Connect with me</h4>
               <div className="contact__social-links">
@@ -201,68 +230,77 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="contact__form-container">
             <form className="contact__form" onSubmit={handleSubmit}>
-              {formStatus.type && (
-                <div className={`contact__alert contact__alert--${formStatus.type}`}>
-                  {formStatus.message}
-                </div>
-              )}
-              
+              {/* ... form fields ... */}
               <div className="contact__form-group">
                 <label htmlFor="name" className="contact__form-label">Name *</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="contact__form-input" 
-                  required 
+                  className="contact__form-input"
+                  required
+                  autoComplete="name"
+                  disabled={isSubmitting}
                 />
               </div>
-              
+
               <div className="contact__form-group">
                 <label htmlFor="email" className="contact__form-label">Email *</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="contact__form-input" 
-                  required 
+                  className="contact__form-input"
+                  required
+                  autoComplete="email"
+                  disabled={isSubmitting}
                 />
               </div>
-              
+
               <div className="contact__form-group">
                 <label htmlFor="subject" className="contact__form-label">Subject</label>
-                <input 
-                  type="text" 
-                  id="subject" 
-                  name="subject" 
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="contact__form-input" 
+                  className="contact__form-input"
+                  autoComplete="off"
+                  disabled={isSubmitting}
                 />
               </div>
-              
+
               <div className="contact__form-group">
                 <label htmlFor="message" className="contact__form-label">Message *</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
+                <textarea
+                  id="message"
+                  name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="contact__form-textarea" 
-                  rows={5} 
+                  className="contact__form-textarea"
+                  rows={5}
                   required
+                  autoComplete="off"
+                  disabled={isSubmitting}
                 ></textarea>
               </div>
-              
+
               <div className="contact__form-submit">
-                <button type="submit" className="button button--primary">Send Message</button>
+                <button
+                  type="submit"
+                  className="button button--primary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
               </div>
             </form>
           </div>

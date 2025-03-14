@@ -1,20 +1,20 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
+@use '../../variables.scss';
+@use '../../mixins.scss';
 
 .projects {
-  background-color: $color-background;
+  background-color: variables.$color-background;
   position: relative;
   
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-8;
+    gap: variables.$spacing-8;
     
-    @include sm {
+    @include mixins.sm {
       grid-template-columns: repeat(2, 1fr);
     }
     
-    @include lg {
+    @include mixins.lg {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -43,7 +43,7 @@
   }
   
   &__card {
-    @include card;
+    @include mixins.card;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -67,8 +67,8 @@
     height: 0;
     padding-bottom: 56.25%; // 16:9 aspect ratio
     overflow: hidden;
-    border-top-left-radius: $border-radius-lg;
-    border-top-right-radius: $border-radius-lg;
+    border-top-left-radius: variables.$border-radius-lg;
+    border-top-right-radius: variables.$border-radius-lg;
   }
   
   &__img {
@@ -82,21 +82,21 @@
   }
   
   &__info {
-    padding: $spacing-6;
+    padding: variables.$spacing-6;
     flex-grow: 1;
   }
   
   &__title {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $color-text;
-    margin-bottom: $spacing-2;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text;
+    margin-bottom: variables.$spacing-2;
   }
   
   &__description {
-    @include body-text-sm;
-    color: $color-text-light;
-    margin-bottom: $spacing-4;
+    @include mixins.body-text-sm;
+    color: variables.$color-text-light;
+    margin-bottom: variables.$spacing-4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -104,25 +104,25 @@
   }
   
   &__tech {
-    padding: 0 $spacing-6 $spacing-6;
+    padding: 0 variables.$spacing-6 variables.$spacing-6;
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-2;
+    gap: variables.$spacing-2;
   }
   
   &__tech-tag {
     display: inline-block;
-    background-color: $color-background-alt;
-    color: $color-text-light;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
-    padding: $spacing-1 $spacing-2;
-    border-radius: $border-radius-full;
-    transition: $transition-base;
+    background-color: variables.$color-background-alt;
+    color: variables.$color-text-light;
+    font-size: variables.$font-size-xs;
+    font-weight: variables.$font-weight-medium;
+    padding: variables.$spacing-1 variables.$spacing-2;
+    border-radius: variables.$border-radius-full;
+    transition: variables.$transition-base;
     
     &:hover {
-      background-color: rgba($color-primary, 0.1);
-      color: $color-primary;
+      background-color: rgba(variables.$color-primary, 0.1);
+      color: variables.$color-primary;
     }
   }
   
@@ -132,17 +132,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba($color-secondary, 0.8);
+    background-color: rgba(variables.$color-secondary, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: $border-radius-lg;
+    border-radius: variables.$border-radius-lg;
   }
   
   &__view-btn {
-    @include button-primary;
+    @include mixins.button-primary;
     transform: translateY(20px);
     transition: transform 0.3s ease 0.1s;
     
@@ -153,7 +153,7 @@
   
   // Modal styles
   &__modal-overlay {
-    background-color: rgba($color-secondary, 0.75);
+    background-color: rgba(variables.$color-secondary, 0.75);
     position: fixed;
     inset: 0;
     animation: fadeIn 0.3s ease;
@@ -176,9 +176,9 @@
     width: 90%;
     max-width: 900px;
     max-height: 90vh;
-    background-color: $color-background;
-    border-radius: $border-radius-lg;
-    box-shadow: $shadow-xl;
+    background-color: variables.$color-background;
+    border-radius: variables.$border-radius-lg;
+    box-shadow: variables.$shadow-xl;
     overflow-y: auto;
     animation: modalIn 0.3s ease;
     
@@ -195,27 +195,27 @@
   }
   
   &__modal-header {
-    @include flex-between;
-    padding: $spacing-6;
-    border-bottom: 1px solid $color-border;
+    @include mixins.flex-between;
+    padding: variables.$spacing-6;
+    border-bottom: 1px solid variables.$color-border;
   }
   
   &__modal-title {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
-    color: $color-text;
+    font-size: variables.$font-size-xl;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text;
   }
   
   &__modal-close {
     background: none;
     border: none;
-    font-size: $font-size-2xl;
-    color: $color-text-light;
+    font-size: variables.$font-size-2xl;
+    color: variables.$color-text-light;
     cursor: pointer;
-    transition: $transition-base;
+    transition: variables.$transition-base;
     
     &:hover {
-      color: $color-primary;
+      color: variables.$color-primary;
     }
   }
   
@@ -231,45 +231,45 @@
   }
   
   &__modal-content {
-    padding: $spacing-6;
+    padding: variables.$spacing-6;
   }
   
   &__modal-description {
-    @include body-text;
-    color: $color-text-light;
-    margin-bottom: $spacing-6;
+    @include mixins.body-text;
+    color: variables.$color-text-light;
+    margin-bottom: variables.$spacing-6;
   }
   
   &__modal-tech {
-    margin-bottom: $spacing-6;
+    margin-bottom: variables.$spacing-6;
     
     h4 {
-      font-size: $font-size-base;
-      font-weight: $font-weight-semibold;
-      color: $color-text;
-      margin-bottom: $spacing-3;
+      font-size: variables.$font-size-base;
+      font-weight: variables.$font-weight-semibold;
+      color: variables.$color-text;
+      margin-bottom: variables.$spacing-3;
     }
   }
   
   &__modal-tech-list {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-2;
+    gap: variables.$spacing-2;
   }
   
   &__modal-tech-tag {
     display: inline-block;
-    background-color: rgba($color-primary, 0.1);
-    color: $color-primary;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    padding: $spacing-1 $spacing-3;
-    border-radius: $border-radius-full;
+    background-color: rgba(variables.$color-primary, 0.1);
+    color: variables.$color-primary;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-medium;
+    padding: variables.$spacing-1 variables.$spacing-3;
+    border-radius: variables.$border-radius-full;
   }
   
   &__modal-links {
     display: flex;
-    gap: $spacing-4;
+    gap: variables.$spacing-4;
     flex-wrap: wrap;
   }
 }

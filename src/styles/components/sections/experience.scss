@@ -1,8 +1,8 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
+@use '../../variables.scss';
+@use '../../mixins.scss';
 
 .experience {
-  background-color: $color-background-alt;
+  background-color: variables.$color-background-alt;
   position: relative;
   overflow: hidden;
   
@@ -14,7 +14,7 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: rgba($color-primary, 0.05);
+    background-color: rgba(variables.$color-primary, 0.05);
     z-index: 0;
   }
   
@@ -26,7 +26,7 @@
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background-color: rgba($color-primary, 0.05);
+    background-color: rgba(variables.$color-primary, 0.05);
     z-index: 0;
   }
   
@@ -44,13 +44,13 @@
       content: '';
       position: absolute;
       width: 4px;
-      background-color: $color-primary;
+      background-color: variables.$color-primary;
       top: 0;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       
-      @include md {
+      @include mixins.md {
         margin-left: 0;
       }
     }
@@ -58,7 +58,7 @@
   
   &__item {
     position: relative;
-    margin-bottom: $spacing-12;
+    margin-bottom: variables.$spacing-12;
     opacity: 0;
     
     .experience--animated & {
@@ -84,24 +84,24 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      background-color: $color-background;
-      border: 4px solid $color-primary;
+      background-color: variables.$color-background;
+      border: 4px solid variables.$color-primary;
       border-radius: 50%;
       top: 15px;
       z-index: 1;
     }
     
     &--left {
-      @include md {
+      @include mixins.md {
         padding-right: 50%;
-        padding-left: $spacing-8;
+        padding-left: variables.$spacing-8;
       }
       
       &::after {
         left: 50%;
         transform: translateX(-50%);
         
-        @include md {
+        @include mixins.md {
           left: auto;
           right: -10px;
         }
@@ -109,16 +109,16 @@
     }
     
     &--right {
-      @include md {
+      @include mixins.md {
         padding-left: 50%;
-        padding-right: $spacing-8;
+        padding-right: variables.$spacing-8;
       }
       
       &::after {
         left: 50%;
         transform: translateX(-50%);
         
-        @include md {
+        @include mixins.md {
           left: -10px;
           right: auto;
         }
@@ -127,83 +127,83 @@
   }
   
   &__card {
-    background-color: $color-background;
-    border-radius: $border-radius-lg;
-    padding: $spacing-6;
-    box-shadow: $shadow-md;
+    background-color: variables.$color-background;
+    border-radius: variables.$border-radius-lg;
+    padding: variables.$spacing-6;
+    box-shadow: variables.$shadow-md;
     position: relative;
-    transition: $transition-base;
+    transition: variables.$transition-base;
     
     &:hover {
       transform: translateY(-5px);
-      box-shadow: $shadow-lg;
+      box-shadow: variables.$shadow-lg;
     }
   }
   
   &__period {
     display: inline-block;
-    background-color: $color-primary;
-    color: $color-background;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    padding: $spacing-1 $spacing-3;
-    border-radius: $border-radius-full;
-    margin-bottom: $spacing-4;
+    background-color: variables.$color-primary;
+    color: variables.$color-background;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-medium;
+    padding: variables.$spacing-1 variables.$spacing-3;
+    border-radius: variables.$border-radius-full;
+    margin-bottom: variables.$spacing-4;
   }
   
   &__position {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $color-text;
-    margin-bottom: $spacing-2;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text;
+    margin-bottom: variables.$spacing-2;
   }
   
   &__company {
-    font-size: $font-size-base;
-    font-weight: $font-weight-medium;
-    color: $color-primary;
-    margin-bottom: $spacing-4;
+    font-size: variables.$font-size-base;
+    font-weight: variables.$font-weight-medium;
+    color: variables.$color-primary;
+    margin-bottom: variables.$spacing-4;
   }
   
   &__description {
-    @include body-text;
-    color: $color-text-light;
-    margin-bottom: $spacing-4;
+    @include mixins.body-text;
+    color: variables.$color-text-light;
+    margin-bottom: variables.$spacing-4;
   }
   
   &__skills {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-2;
-    margin-top: $spacing-4;
+    gap: variables.$spacing-2;
+    margin-top: variables.$spacing-4;
   }
   
   &__skill-tag {
     display: inline-block;
-    background-color: $color-background-alt;
-    color: $color-text-light;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
-    padding: $spacing-1 $spacing-2;
-    border-radius: $border-radius-full;
-    transition: $transition-base;
+    background-color: variables.$color-background-alt;
+    color: variables.$color-text-light;
+    font-size: variables.$font-size-xs;
+    font-weight: variables.$font-weight-medium;
+    padding: variables.$spacing-1 variables.$spacing-2;
+    border-radius: variables.$border-radius-full;
+    transition: variables.$transition-base;
     
     &:hover {
-      background-color: rgba($color-primary, 0.1);
-      color: $color-primary;
+      background-color: rgba(variables.$color-primary, 0.1);
+      color: variables.$color-primary;
     }
   }
   
   &__download {
     text-align: center;
-    margin-top: $spacing-16;
-    padding-top: $spacing-8;
-    border-top: 1px solid $color-border;
+    margin-top: variables.$spacing-16;
+    padding-top: variables.$spacing-8;
+    border-top: 1px solid variables.$color-border;
     
     p {
-      @include body-text;
-      color: $color-text-light;
-      margin-bottom: $spacing-4;
+      @include mixins.body-text;
+      color: variables.$color-text-light;
+      margin-bottom: variables.$spacing-4;
     }
   }
 }
