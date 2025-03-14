@@ -216,4 +216,85 @@
       min-width: 150px;
     }
   }
+  &__form-group {
+    &--error {
+      .contact__form-label {
+        color: variables.$color-error;
+      }
+    }
+  }
+  
+  &__form-input,
+  &__form-textarea {
+    &--error {
+      border-color: variables.$color-error;
+      background-color: rgba(variables.$color-error, 0.02);
+      
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(variables.$color-error, 0.1);
+      }
+    }
+  }
+  
+  &__form-error {
+    font-size: variables.$font-size-xs;
+    color: variables.$color-error;
+    margin-top: variables.$spacing-1;
+  }
+  
+  // Loading animation for button
+  &__button-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &-text {
+      margin-right: variables.$spacing-1;
+    }
+    
+    &-dots {
+      display: inline-flex;
+      
+      span {
+        animation: dotPulse 1.5s infinite;
+        animation-fill-mode: both;
+        
+        &:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+      }
+      
+      @keyframes dotPulse {
+        0% {
+          opacity: 0.2;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+}
+
+// Improve transition for alert messages
+.contact__alert {
+  animation: slideDown 0.3s ease-out;
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

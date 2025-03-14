@@ -3,6 +3,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import portfolioData from '../../data/portfolio-data';
 
+// Define validation error types
+type ValidationErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
@@ -11,6 +18,9 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
+  
+  const [errors, setErrors] = useState<ValidationErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<{
     type: 'success' | 'error' | null;
     message: string;
@@ -18,13 +28,11 @@ const Contact: React.FC = () => {
     type: null,
     message: ''
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
+  
   useEffect(() => {
     // Store a reference to the current DOM node
     const currentRef = contactRef.current;
-
+    
     // Animation for the contact section
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -37,11 +45,11 @@ const Contact: React.FC = () => {
         rootMargin: '-100px',
       }
     );
-
+    
     if (currentRef) {
       observer.observe(currentRef);
     }
-
+    
     return () => {
       // Use the stored reference in the cleanup function
       if (currentRef) {
@@ -49,40 +57,74 @@ const Contact: React.FC = () => {
       }
     };
   }, []);
-
+  
+  const validateForm = (): boolean => {
+    const newErrors: ValidationErrors = {};
+    let isValid = true;
+    
+    // Validate name
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+      isValid = false;
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+      isValid = false;
+    }
+    
+    // Validate email
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = 'Please enter a valid email address';
+        isValid = false;
+      }
+    }
+    
+    // Validate message
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+      isValid = false;
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+      isValid = false;
+    }
+    
+    setErrors(newErrors);
+    return isValid;
+  };
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // Clear the error for this field when user starts typing
+    if (errors[name as keyof ValidationErrors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please fill in all required fields.'
-      });
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please enter a valid email address.'
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
+    
+    // Reset form status
     setFormStatus({ type: null, message: '' });
-
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
     try {
       // Send the form data to the API route
       const response = await fetch('/api/contact', {
@@ -92,19 +134,19 @@ const Contact: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
-
+      
       const data = await response.json();
-
+      
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');
       }
-
+      
       // Success
       setFormStatus({
         type: 'success',
         message: 'Your message has been sent successfully! I will get back to you soon.'
       });
-
+      
       // Reset form after successful submission
       setFormData({
         name: '',
@@ -112,41 +154,51 @@ const Contact: React.FC = () => {
         subject: '',
         message: ''
       });
-
+      
+      // Scroll to form top to show success message
+      const formElement = document.querySelector('.contact__form');
+      formElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
       // Clear success message after 5 seconds
       setTimeout(() => {
         setFormStatus({
           type: null,
           message: ''
         });
-      }, 5000);
-
+      }, 7000);
+      
     } catch (error) {
       console.error('Error submitting form:', error);
       setFormStatus({
         type: 'error',
-        message: error instanceof Error ? error.message : 'Failed to send your message. Please try again later.'
+        message: error instanceof Error 
+          ? error.message 
+          : 'Failed to send your message. Please try again later.'
       });
+      
+      // Scroll to form top to show error message
+      const formElement = document.querySelector('.contact__form');
+      formElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <section id="contact" className="contact section" ref={contactRef}>
       <div className="container">
         <div className="section__header">
           <h2 className="section__title">Get In Touch</h2>
-          <p className="section__subtitle">Let&apos;s discuss your project or just say hello</p>
+          <p className="section__subtitle">Let's discuss your project or just say hello</p>
         </div>
-
+        
         <div className="contact__content">
           <div className="contact__info">
             <div className="contact__info-heading">
               <h3>Contact Information</h3>
               <p>Feel free to reach out through any of the following methods:</p>
             </div>
-
+            
             <div className="contact__info-items">
               <div className="contact__info-item">
                 <div className="contact__info-icon">
@@ -161,7 +213,7 @@ const Contact: React.FC = () => {
                   </a>
                 </div>
               </div>
-
+              
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -176,7 +228,7 @@ const Contact: React.FC = () => {
                   </a>
                 </div>
               </div>
-
+              
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -189,7 +241,7 @@ const Contact: React.FC = () => {
                   <p>{portfolioData.location}</p>
                 </div>
               </div>
-
+              
               <div className="contact__info-item">
                 <div className="contact__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -206,11 +258,11 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="contact__social">
               <h4>Connect with me</h4>
               <div className="contact__social-links">
-                <a href="https://github.com/mladjom" target="_blank" rel="noopener noreferrer" className="contact__social-link">
+                <a href={`https://${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className="contact__social-link">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                   </svg>
@@ -230,46 +282,53 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-
+          
           <div className="contact__form-container">
-            <form className="contact__form" onSubmit={handleSubmit}>
-              {/* ... form fields ... */}
-              <div className="contact__form-group">
+            <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              {formStatus.type && (
+                <div className={`contact__alert contact__alert--${formStatus.type}`}>
+                  {formStatus.message}
+                </div>
+              )}
+              
+              <div className={`contact__form-group ${errors.name ? 'contact__form-group--error' : ''}`}>
                 <label htmlFor="name" className="contact__form-label">Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
                   value={formData.name}
                   onChange={handleChange}
-                  className="contact__form-input"
-                  required
+                  className={`contact__form-input ${errors.name ? 'contact__form-input--error' : ''}`}
+                  required 
                   autoComplete="name"
                   disabled={isSubmitting}
                 />
+                {errors.name && <div className="contact__form-error">{errors.name}</div>}
               </div>
-
-              <div className="contact__form-group">
+              
+              <div className={`contact__form-group ${errors.email ? 'contact__form-group--error' : ''}`}>
                 <label htmlFor="email" className="contact__form-label">Email *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
                   value={formData.email}
                   onChange={handleChange}
-                  className="contact__form-input"
-                  required
+                  className={`contact__form-input ${errors.email ? 'contact__form-input--error' : ''}`}
+                  required 
                   autoComplete="email"
                   disabled={isSubmitting}
                 />
+                {errors.email && <div className="contact__form-error">{errors.email}</div>}
               </div>
-
+              
               <div className="contact__form-group">
                 <label htmlFor="subject" className="contact__form-label">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
+                <input 
+                  type="text" 
+                  id="subject" 
+                  name="subject" 
                   value={formData.subject}
                   onChange={handleChange}
                   className="contact__form-input"
@@ -277,29 +336,39 @@ const Contact: React.FC = () => {
                   disabled={isSubmitting}
                 />
               </div>
-
-              <div className="contact__form-group">
+              
+              <div className={`contact__form-group ${errors.message ? 'contact__form-group--error' : ''}`}>
                 <label htmlFor="message" className="contact__form-label">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
+                <textarea 
+                  id="message" 
+                  name="message" 
                   value={formData.message}
                   onChange={handleChange}
-                  className="contact__form-textarea"
-                  rows={5}
+                  className={`contact__form-textarea ${errors.message ? 'contact__form-textarea--error' : ''}`}
+                  rows={5} 
                   required
                   autoComplete="off"
                   disabled={isSubmitting}
                 ></textarea>
+                {errors.message && <div className="contact__form-error">{errors.message}</div>}
               </div>
-
+              
               <div className="contact__form-submit">
-                <button
-                  type="submit"
+                <button 
+                  type="submit" 
                   className="button button--primary"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? (
+                    <span className="contact__button-loading">
+                      <span className="contact__button-loading-text">Sending</span>
+                      <span className="contact__button-loading-dots">
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+                      </span>
+                    </span>
+                  ) : 'Send Message'}
                 </button>
               </div>
             </form>
