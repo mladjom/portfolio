@@ -1,15 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../styles/global.scss';
-import '../styles/components/layout/header.scss';
-import '../styles/components/layout/footer.scss';
-import '../styles/components/sections/hero.scss';
-import '../styles/components/sections/about.scss';
-import '../styles/components/sections/skills.scss';
-import '../styles/components/sections/experience.scss';
-import '../styles/components/sections/projects.scss';
-import '../styles/components/sections/education.scss';
-import '../styles/components/sections/contact.scss';
 
 const inter = Inter({ 
   subsets: ['latin'],
